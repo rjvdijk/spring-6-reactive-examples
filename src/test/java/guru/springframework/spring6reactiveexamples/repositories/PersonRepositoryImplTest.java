@@ -7,7 +7,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class PersonRepositoryImplTest {
 
@@ -17,14 +17,14 @@ class PersonRepositoryImplTest {
     void testGetByIdFound() {
         Mono<Person> personMono = personRepository.getById(3);
 
-        assertEquals(Boolean.TRUE, personMono.hasElement().block());
+        assertThat(personMono.hasElement().block()).isTrue();
     }
 
     @Test
     void testGetByIdNotFound() {
         Mono<Person> personMono = personRepository.getById(6);
 
-        assertEquals(Boolean.FALSE, personMono.hasElement().block());
+        assertThat(personMono.hasElement().block()).isFalse();
     }
 
     @Test
